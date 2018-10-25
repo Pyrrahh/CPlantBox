@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/crootbox/CPlantBox && $(CMAKE_COMMAND) -E cmake_progress_start /home/crootbox/CPlantBox/CMakeFiles /home/crootbox/CPlantBox/python/CMakeFiles/progress.marks
-	cd /home/crootbox/CPlantBox && $(MAKE) -f CMakeFiles/Makefile2 python/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/crootbox/CPlantBox/CMakeFiles /home/crootbox/CPlantBox/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/crootbox/CPlantBox/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/crootbox/CPlantBox && $(MAKE) -f CMakeFiles/Makefile2 python/clean
+	$(MAKE) -f CMakeFiles/Makefile2 clean
 .PHONY : clean
 
 # The main clean target
@@ -97,18 +97,57 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/crootbox/CPlantBox && $(MAKE) -f CMakeFiles/Makefile2 python/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/crootbox/CPlantBox && $(MAKE) -f CMakeFiles/Makefile2 python/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/crootbox/CPlantBox && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named CPlantBox
+
+# Build rule for target.
+CPlantBox: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CPlantBox
+.PHONY : CPlantBox
+
+# fast build rule for target.
+CPlantBox/fast:
+	$(MAKE) -f src/CMakeFiles/CPlantBox.dir/build.make src/CMakeFiles/CPlantBox.dir/build
+.PHONY : CPlantBox/fast
+
+#=============================================================================
+# Target rules for targets named py_plantbox
+
+# Build rule for target.
+py_plantbox: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 py_plantbox
+.PHONY : py_plantbox
+
+# fast build rule for target.
+py_plantbox/fast:
+	$(MAKE) -f src/CMakeFiles/py_plantbox.dir/build.make src/CMakeFiles/py_plantbox.dir/build
+.PHONY : py_plantbox/fast
+
+#=============================================================================
+# Target rules for targets named test_cplantbox
+
+# Build rule for target.
+test_cplantbox: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_cplantbox
+.PHONY : test_cplantbox
+
+# fast build rule for target.
+test_cplantbox/fast:
+	$(MAKE) -f examples/CMakeFiles/test_cplantbox.dir/build.make examples/CMakeFiles/test_cplantbox.dir/build
+.PHONY : test_cplantbox/fast
 
 # Help Target
 help:
@@ -118,6 +157,9 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... CPlantBox"
+	@echo "... py_plantbox"
+	@echo "... test_cplantbox"
 .PHONY : help
 
 
@@ -129,6 +171,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/crootbox/CPlantBox && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
