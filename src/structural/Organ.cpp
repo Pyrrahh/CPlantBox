@@ -485,9 +485,9 @@ void Organ::rel2abs()
 
 		for(size_t i=1; i<nodes.size(); i++)
 		{
-			double sdx = nodes[i].length();
-			Vector3d newdx = getIncrement(nodes[i-1], sdx, i-1); //add tropism
-			nodes[i] = nodes[i-1].plus(newdx); //replace relative by absolute position
+			Vector3d h = heading(i-1);
+			Matrix3d ons = Matrix3d::ons(h);
+			nodes[i] = nodes[i-1].plus(ons.times(nodes[i]));
 		}
 		moved = true; //update position of existing nodes in MappedSegments
 	}
@@ -504,7 +504,17 @@ void Organ::rel2abs()
 void Organ::abs2rel()
 {
 	bool isShoot = ((organType()==Organism::ot_stem)||(organType()==Organism::ot_leaf));
-	if(isShoot||(getParent()->hasRelCoord()))//convert to relative coordinate if is shoot organ or carried by shoot organs
+	auto ot_parent = -1;
+	auto parent_ = getParent();
+	while((ot_parent != 0) && (ot_parent != 4) && (parent_ != nullptr)) // we reach either a seed (finished going up parents) or leaf (need to be in relative coordinatesI
+	{
+		ot_parent = parent_->organType();
+		parent_ = parent_->getParent();
+	}
+	
+	bool hasShootParent = ot_parent == 4;
+
+	if(isShoot||hasShootParent)//convert to relative coordinate if is shoot organ or carried by shoot organs
 	{
 		for (int j = nodes.size(); j>1; j--) {
 			auto nodes_j_1 = nodes.at(j-1).minus(nodes.at(j-2));
@@ -515,6 +525,7 @@ void Organ::abs2rel()
 		nodes[0] = Vector3d(0.,0.,0.);
 		moved = true; //update position of existing nodes in MappedSegments
 	}
+	
 	for(size_t i=0; i<children.size(); i++){
 		//if((children[i])->organType()!=Organism::ot_root){
 			(children[i])->abs2rel();
