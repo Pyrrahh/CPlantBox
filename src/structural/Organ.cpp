@@ -507,9 +507,10 @@ void Organ::abs2rel()
 	if(isShoot||(getParent()->hasRelCoord()))//convert to relative coordinate if is shoot organ or carried by shoot organs
 	{
 		for (int j = nodes.size(); j>1; j--) {
-			double sdx = (nodes.at(j-1).minus(nodes.at(j-2))).length();
-			nodes.at(j-1) = Vector3d(sdx,0.,0.);
-			//nodes.at(j-1) = nodes.at(j-1).minus(nodes.at(j-2));
+			auto nodes_j_1 = nodes.at(j-1).minus(nodes.at(j-2));
+			Vector3d h = heading(j-2);
+			Matrix3d onsinv = Matrix3d::ons(h).inverse();
+			nodes.at(j-1) = onsinv.times(nodes_j_1);
 		}
 		nodes[0] = Vector3d(0.,0.,0.);
 		moved = true; //update position of existing nodes in MappedSegments
@@ -563,7 +564,14 @@ Vector3d Organ::heading(int n ) const
 	if(n<0){n=nodes.size()-1 ;}
 	if ((nodes.size()>1)&&(n>0)) {
 		n = std::min(int(nodes.size()),n);
-		Vector3d h = getNode(n).minus(getNode(n-1));
+		Vector3d h ;
+		if(hasRelCoord())
+		{
+			h = getNode(n);
+		}else{
+			//Vector3d n1 = nodes.at(nn-1);
+			h =  getNode(n).minus(getNode(n-1));
+		}
 		h.normalize();
 		return h;
 	} else {
@@ -597,10 +605,13 @@ Vector3d Organ::getIncrement(const Vector3d& p, double sdx, int n)
 
     Vector3d h = heading(n);
     Matrix3d ons = Matrix3d::ons(h);
-    Vector2d ab = getOrganRandomParameter()->f_tf->getHeading(p, ons, dx(), shared_from_this(), n+1);
-	//for leaves: necessary?
-	//Vector2d ab = getLeafRandomParameter()->f_tf->getHeading(p, ons, dx(),shared_from_this());
-    Vector3d sv = ons.times(Vector3d::rotAB(ab.x,ab.y));
+    Vector2d ab = getOrganRandomParameter()->f_tf->getHeading(p, ons, dx(), shared_from_this());
+	Vector3d sv;
+	if(hasRelCoord()){
+		sv = Vector3d::rotAB(ab.x,ab.y); // ons added in @see Organ::rel2abs()
+	}else{
+		sv = ons.times(Vector3d::rotAB(ab.x,ab.y));
+	}
     return sv.times(sdx);
 }
 
@@ -675,12 +686,14 @@ void Organ::createSegments(double l, double dt, bool verbose, int PhytoIdx)
                 double sdx = olddx + shiftl; // length of new segment
                 // Vector3d newdxv = getIncrement(n2, sdx);
 
+				h.normalize();
 				if(hasRelCoord())
 				{
-					nodes.at(nn-1) =  Vector3d(sdx,0.,0.);//h.times(sdx);
+					nodes.at(nn-1) =  h.times(sdx);
+					
 				}else{
-					h.normalize();
-					nodes.at(nn-1) = Vector3d(n2.plus(h.times(sdx))); // n2.plus(newdxv)
+				   
+					nodes.at(nn-1) = Vector3d(n2.plus(h.times(sdx))); 
 				}
                 double et = this->calcCreationTime(getLength(true)+shiftl, dt);
                 nodeCTs.at(nn-1) = et; // in case of impeded growth the node emergence time is not exact anymore, but might break down to temporal resolution
@@ -720,12 +733,13 @@ void Organ::createSegments(double l, double dt, bool verbose, int PhytoIdx)
         }
         sl += sdx;
 		Vector3d newnode;
+		Vector3d newdx = getIncrement(nodes.at(nn+i-1), sdx,nn+i-1);
 		if(hasRelCoord())
 		{
-			newnode = Vector3d(sdx, 0., 0.);
+			newnode = newdx;
 		}else{
-			Vector3d newdx = getIncrement(nodes.back(), sdx);
-			newnode = Vector3d(nodes.back().plus(newdx));
+													
+			newnode = Vector3d(nodes.at(nn+i-1).plus(newdx));
 		}
         double et = this->calcCreationTime(getLength(true)+shiftl+sl, dt);//here length or get length? it s the same because epsilonDx was set back to 0 at beginning of simulate no?
         // in case of impeded growth the node emergence time is not exact anymore,
