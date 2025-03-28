@@ -503,6 +503,12 @@ void Organ::rel2abs()
  */
 void Organ::abs2rel()
 {
+	
+	for(size_t i=0; i<children.size(); i++){
+		//if((children[i])->organType()!=Organism::ot_root){
+			(children[i])->abs2rel();
+		//}
+	}//if carry children, update their pos
 	bool isShoot = ((organType()==Organism::ot_stem)||(organType()==Organism::ot_leaf));
 	auto ot_parent = -1;
 	auto parent_ = getParent();
@@ -526,11 +532,6 @@ void Organ::abs2rel()
 		moved = true; //update position of existing nodes in MappedSegments
 	}
 	
-	for(size_t i=0; i<children.size(); i++){
-		//if((children[i])->organType()!=Organism::ot_root){
-			(children[i])->abs2rel();
-		//}
-	}//if carry children, update their pos
 
 }
 
