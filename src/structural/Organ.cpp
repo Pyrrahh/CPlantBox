@@ -481,13 +481,15 @@ void Organ::rel2abs()
 {
 	if(hasRelCoord())
 	{
-		nodes[0] = getOrigin(); //recompute position of the first node
+		nodes[0] = Vector3d(getOrigin()); //recompute position of the first node
 
 		for(size_t i=1; i<nodes.size(); i++)
 		{
-			double sdx = nodes[i].length();
-			Vector3d newdx = getIncrement(nodes[i-1], sdx, i-1); //add tropism
-			nodes[i] = nodes[i-1].plus(newdx); //replace relative by absolute position
+			//nodes[i] = nodes[i-1].plus(nodes[i]);
+			
+			Vector3d h = heading(i-1);
+			Matrix3d ons = Matrix3d::ons(h);
+			nodes[i] = nodes[i-1].plus(ons.times(nodes[i]));
 		}
 		moved = true; //update position of existing nodes in MappedSegments
 	}
@@ -503,23 +505,37 @@ void Organ::rel2abs()
  */
 void Organ::abs2rel()
 {
-	bool isShoot = ((organType()==Organism::ot_stem)||(organType()==Organism::ot_leaf));
-	if(isShoot||(getParent()->hasRelCoord()))//convert to relative coordinate if is shoot organ or carried by shoot organs
-	{
-		for (int j = nodes.size(); j>1; j--) {
-			auto nodes_j_1 = nodes.at(j-1).minus(nodes.at(j-2));
-			Vector3d h = heading(j-2);
-			Matrix3d onsinv = Matrix3d::ons(h).inverse();
-			nodes.at(j-1) = onsinv.times(nodes_j_1);
-		}
-		nodes[0] = Vector3d(0.,0.,0.);
-		moved = true; //update position of existing nodes in MappedSegments
-	}
 	for(size_t i=0; i<children.size(); i++){
 		//if((children[i])->organType()!=Organism::ot_root){
 			(children[i])->abs2rel();
 		//}
-	}//if carry children, update their pos
+	}//if carry children, update their pos	
+	bool isShoot = ((organType()==Organism::ot_stem)||(organType()==Organism::ot_leaf));
+	//bool notBaseOrgan = !(getParent()->organType()==Organism::ot_seed);
+	auto ot_parent = -1;
+	auto parent_ = getParent();
+	while((ot_parent != 0) && (ot_parent != 4) && (parent_ != nullptr)) // we reach either a seed (finished going up parents) or leaf (need to be in relative coordinatesI
+	{
+		ot_parent = parent_->organType();
+		parent_ = parent_->getParent();
+	}
+	
+	bool hasShootParent = ot_parent == 4;
+
+	if((isShoot||hasShootParent)&&(!hasRelCoord()))//convert to relative coordinate if is shoot organ or carried by shoot organs
+	{	 
+		for (int j = nodes.size(); j>1; j--) {
+			auto nodes_j_1 = nodes.at(j-1).minus(nodes.at(j-2));
+			Vector3d h = heading(j-2);
+			Matrix3d onsinv = Matrix3d::ons(h).inverse();
+			Matrix3d tempMatrix = Matrix3d::ons(h);
+			tempMatrix.times(Matrix3d::ons(h).inverse());
+			nodes.at(j-1) = onsinv.times(nodes_j_1);
+			//nodes.at(j-1) = nodes_j_1;
+		}
+		nodes[0] = Vector3d(0.,0.,0.);
+		moved = true; //update position of existing nodes in MappedSegments
+	}
 
 }
 
@@ -541,7 +557,8 @@ Vector3d Organ::getiHeading0()  const
 	Matrix3d parentHeading;
 	bool isBaseOrgan = (getParent()->organType()==Organism::ot_seed);
 	bool isShootBornRoot = ((getParent()->organType()==Organism::ot_stem)&&(organType()==Organism::ot_root));
-	if (isBaseOrgan||isShootBornRoot) { // from seed?
+	bool isRootBornShoot = ((getParent()->organType()==Organism::ot_root)&&((organType()==Organism::ot_stem)||(organType()==Organism::ot_leaf) ));
+	if (isBaseOrgan||isShootBornRoot||isRootBornShoot) { // from seed?
 		if (organType()==Organism::ot_root) {
 			parentHeading = Matrix3d(Vector3d(0, 0, -1), Vector3d(0, -1, 0), Vector3d(-1, 0, 0));
 		}else{
@@ -566,8 +583,9 @@ Vector3d Organ::heading(int n ) const
 		n = std::min(int(nodes.size()),n);
 		Vector3d h ;
 		if(hasRelCoord())
-		{
-			h = getNode(n);
+		{ 
+			assert(false);
+			h = Vector3d(getNode(n));
 		}else{
 			//Vector3d n1 = nodes.at(nn-1);
 			h =  getNode(n).minus(getNode(n-1));
@@ -602,11 +620,12 @@ double Organ::orgVolume(double length_,  bool realized) const
  */
 Vector3d Organ::getIncrement(const Vector3d& p, double sdx, int n)
 {
-
+	this->getPlant()->rel2abs();
     Vector3d h = heading(n);
     Matrix3d ons = Matrix3d::ons(h);
     Vector2d ab = getOrganRandomParameter()->f_tf->getHeading(p, ons, dx(), shared_from_this());
 	Vector3d sv;
+	this->getPlant()->abs2rel();
 	if(hasRelCoord()){
 		sv = Vector3d::rotAB(ab.x,ab.y); // ons added in @see Organ::rel2abs()
 	}else{
@@ -668,17 +687,19 @@ void Organ::createSegments(double l, double dt, bool verbose, int PhytoIdx)
 		bool notChildBaseNode = (children.empty() || (nn-1 != std::static_pointer_cast<Organ>(children.back())->parentNI));
 		// don't move a child base node unless you have phytomere expansion
         if (notFirstNode && (notChildBaseNode || stemElongation) ) {
-
+std::cout << "\n=== Segment Debug === " << getId()<<" "<<nn-1 << std::endl;
 
 			Vector3d h;
+			//getPlant()->rel2abs();
 			Vector3d n2 = nodes.at(nn-2);
-
 			if(hasRelCoord())
 			{
-				h = nodes.at(nn-1);
+				h = Vector3d(nodes.at(nn-1));
+    std::cout << "Relative coord active → h (from n1 rel): " << h.toString() << std::endl;
 			}else{
 				Vector3d n1 = nodes.at(nn-1);
 				h = n1.minus(n2);
+    std::cout << "Absolute coord active → h (n1 - n2): " << h.toString() << std::endl;
 			}
 			double olddx = h.length(); // length of last segment
             if (olddx<dx()*(1 - 1e-10)) { // shift node instead of creating a new node
@@ -687,6 +708,7 @@ void Organ::createSegments(double l, double dt, bool verbose, int PhytoIdx)
                 // Vector3d newdxv = getIncrement(n2, sdx);
 
 				h.normalize();
+std::cout << "h length: " << h.length() << std::endl;
 				if(hasRelCoord())
 				{
 					nodes.at(nn-1) =  h.times(sdx);
@@ -705,6 +727,8 @@ void Organ::createSegments(double l, double dt, bool verbose, int PhytoIdx)
             } else {
                 moved = false;
             }
+			
+			//getPlant()->abs2rel();
         } else {
             moved = false;
         }

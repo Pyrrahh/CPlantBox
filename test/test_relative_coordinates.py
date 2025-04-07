@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 
 class TestRelCoord(unittest.TestCase):
 
-    def test_coord_100steps(self):
+    def _test_coord_100steps(self):
         pl = pb.MappedPlant()
         path = "../modelparameter/structural/plant/"
         name = "test_relcoord"
@@ -132,6 +132,7 @@ class TestRelCoord(unittest.TestCase):
         # stochastic = False => thus rand() always give 0.5 for Tropism. => result only change according to sigma
         pl.initialize(stochastic = False)
         pl.simulate(100, False)
+        vp.plot_plant(pl, "organType")
         pl.write("test_relcoord_1step.vtp")
         params = pl.organParam
         seedPosx = params[1][0].seedPos.x

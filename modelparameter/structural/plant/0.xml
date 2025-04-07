@@ -174,9 +174,9 @@
     
     <parameter dev="0" name="la" value="2" />
     
-    <parameter dev="0" functiontype="4" name="ln" value="6" />
+    <parameter dev="0" name="ln" value="6" />
     
-    <parameter dev="0" name="lmax" value="0" />
+    <parameter dev="0" name="lmax" value="3" />
     
     <parameter dev="0" name="nob" value="0" />
     <parameter dev="3" name="r" value="7" />

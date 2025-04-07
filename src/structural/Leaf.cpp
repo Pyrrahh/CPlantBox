@@ -779,7 +779,8 @@ Vector3d Leaf::heading(int n ) const
 		Vector3d h;// = getNode(n).minus(getNode(n-1));
 		if(hasRelCoord())
 		{
-			h = getNode(n);
+			assert(false);
+			h = Vector3d(getNode(n));
 		}else{
 			h = getNode(n).minus(getNode(n-1));
 		}
@@ -817,6 +818,7 @@ Vector3d Leaf::heading(int n ) const
 Vector3d Leaf::getIncrement(const Vector3d& p, double sdx, int n)
 {
 
+	getPlant()->rel2abs();
     Vector3d h = heading(n);
     Matrix3d ons = Matrix3d::ons(h);
 	bool isPseudoStem = getParameter("isPseudostem");
@@ -827,6 +829,7 @@ Vector3d Leaf::getIncrement(const Vector3d& p, double sdx, int n)
 	//for leaves: necessary?
 	//Vector2d ab = getLeafRandomParameter()->f_tf->getHeading(p, ons, dx(),shared_from_this());
 	Vector3d sv;
+	getPlant()->abs2rel();
 	if(hasRelCoord()){
 		sv = Vector3d::rotAB(ab.x,ab.y);
 	}else{

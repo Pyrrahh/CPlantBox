@@ -18,13 +18,13 @@ adaptSeed = False
 adaptLeaf = False
 adaptStem = False
 leafRadial = False  # radial or not
-anim = False
+anim = True
 zoomLeafShape = True
 export = False
 getImage = True
 
 # #create plant:
-plant = pb.Plant()
+plant = pb.MappedPlant()
 # Open plant and root parameter from a file
 path = path = "../../modelparameter/structural/plant/"
 name = "example1e"
@@ -112,10 +112,10 @@ for p in plant.getOrganRandomParameter(pb.leaf):
         print(p)
 
 plant.initialize()
-
+plant.simulate(40*0.5, False)
 if anim:
-    dt = 0.1
-    N_ = 200
+    dt = 0.5
+    N_ = 40
     min_ = np.array([0, -20, 0]) / 2
     max_ = np.array([20, 20, 30.]) / 2
     anim = vp.AnimateRoots(plant)
@@ -127,7 +127,7 @@ if anim:
     anim.plant = True
     anim.start()
     for i in range(0, N_):
-        plant.simulate(dt, False)
+        plant.simulate(0.01, False)
         anim.root_name = "subType"
         anim.update()
 
