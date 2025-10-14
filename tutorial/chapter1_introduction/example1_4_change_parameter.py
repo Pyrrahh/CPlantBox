@@ -1,36 +1,33 @@
-import sys;sys.path.append("../..");sys.path.append("../../src/")  # |\label{l14:path}|
+import plantbox as pb  # type: ignore
 
-import plantbox as pb  # |\label{l14:cplantbox}|
-import visualisation.vtk_plot as vp  # |\label{l14:vtk_plot}|
+import visualisation.vtk_plot as vp
 
-plant = pb.Plant()  # Create a new plant |\label{l14:plant}|
+plant = pb.Plant()  # Create a new plant 
 
-# Open plant and root parameter from a file
-path = "../../modelparameter/structural/plant/"
+# Open plant and root parameters from a file
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
 name = "fspm2023"
-plant.readParameters(path + name + ".xml")  # |\label{l14:readparameters}|
+plant.readParameters(path + name + ".xml")  
+root = plant.getOrganRandomParameter(pb.root) 
+stem = plant.getOrganRandomParameter(pb.stem)  
+leaf = plant.getOrganRandomParameter(pb.leaf)  
+seed = plant.getOrganRandomParameter(pb.seed)  
 
-# Get input parameter by organ type
-root = plant.getOrganRandomParameter(pb.root)  # |\label{l14:root}|
-stem = plant.getOrganRandomParameter(pb.stem)  # |\label{l14:stem}|
-leaf = plant.getOrganRandomParameter(pb.leaf)  # |\label{l14:leaf}|
-seed = plant.getOrganRandomParameter(pb.seed)  # |\label{l14:seed}|
-
-print(root[1], stem[1], leaf[1], "\n")  # Print parameters of subType 1 of root, stem, and leaf  |\label{l14:print}|
-print(seed[0], "\n")  # Print the seed parameter  |\label{l14:print_seed}|
+print(root[1], stem[1], leaf[1], "\n")  # Print parameters of subType 1 of root, stem, and leaf
+print(seed[0], "\n")  # Print the seed parameter
 
 # Change a parameter
-root[1].r = 5  # Change elongation rate (r [cm/day]) |\label{l14:change_params_r}|
-root[1].ln = 0.25  # Change inter-lateral distance (ln [cm]) |\label{l14:change_params_ln}|
-root[2].dx = 0.5  # Change axial resolution (dx [cm]) |\label{l14:change_params_dx}|
+root[1].r = 5  # Change elongation rate (r [cm/day]) 
+root[1].ln = 0.25  # Change inter-lateral distance (ln [cm])
+root[2].dx = 0.5  # Change axial resolution (dx [cm])
 root[2].dxMin = 0.1  # Change minimal axial resolution (dxMin [cm])
 
-print(root[1])  # Print new root parameters |\label{l14:print_new}|
+print(root[1])  # Print new root parameters
 
-plant.initialize()  # Initialize |\label{l14:initialize}|
+plant.initialize()
 
 simtime = 40  # days
-plant.simulate(simtime)  # Simulate|\label{l14:simulate}|
+plant.simulate(simtime)
 
 # Plot
 vp.plot_plant(plant, "organType")

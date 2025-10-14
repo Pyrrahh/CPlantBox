@@ -56,3 +56,8 @@ tutorial/jupyter/.ipynb_checkpoints/
 # images
 *.png
 .vscode/settings.json
+
+tutorial/chapter2_structure/results/
+tutorial/jupyter/summer_school_2025/Zeamays_synMRI_modified
+tutorial/jupyter/summer_school_2025/*.rsml
+tutorial/jupyter/summer_school_2025/*.xml
