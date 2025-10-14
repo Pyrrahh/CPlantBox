@@ -1,13 +1,10 @@
 """ map root segments to a soil grid """
-import sys; sys.path.append("../.."); sys.path.append("../../src/");
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/"); sys.path.append("../../../dumux-rosi/python/modules/");
+import numpy as np
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
-from rosi_richards import RichardsSP  # C++ part (Dumux binding)
 from richards import RichardsWrapper  # Python part
-
-import numpy as np
+from rosi_richards import RichardsSP  # C++ part (Dumux binding)
 
 """ Root system """  # |\label{l71m:root_system_start}|
 plant = pb.MappedPlant()

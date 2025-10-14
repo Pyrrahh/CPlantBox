@@ -5,13 +5,11 @@ date : 2022-03-24
 adapted from "example_1e_plantShape"
 
 """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
-import plantbox as pb
-import visualisation.vtk_plot as vp
-
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import plantbox as pb  # type: ignore
+
+import visualisation.vtk_plot as vp  # type: ignore
 
 # #parameters for example:
 adaptSeed = False
