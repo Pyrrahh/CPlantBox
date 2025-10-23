@@ -31,14 +31,14 @@ getImage = False
 # #create plant:
 plant = pb.Plant()
 # Open plant and root parameter from a file
-path = "../../modelparameter/structural/plant/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
 name = "Lactuca_s"
 plant.readParameters(path + name + ".xml")
 
 # #create rootsystem:
 rs = pb.RootSystem()
 # Open plant and root parameter from a file
-path = "../../../modelparameter/plant/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/plant/"
 name = "Lactuca_s"
 rs.readParameters(path + name + ".xml")
 
