@@ -1,6 +1,4 @@
 """small example in a container"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import numpy as np
 import plantbox as pb
 import visualisation.vtk_plot as vp
@@ -10,8 +8,8 @@ rs = pb.Plant()
 
 
 # Open plant and root parameter from a file
-path = path = "../../modelparameter/structural/rootsystem/"
-name = "Zea_mays_4_Leitner_2014"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Crypsis_aculeata_Clausnitzer_1994" #"Zea_mays_4_Leitner_2014"
 rs.readParameters(path + name + ".xml")
 
 
@@ -68,6 +66,6 @@ for container in containers:
     vp.plot_roots_and_container(rs, container)
 
     # Export results (as vtp)
-    rs.write("results/root_system"+str(number)+".vtp")
-    vp.write_container(container, "results/container_"+str(number)+".vtp") # you can pass , resolution=200 to increase resulting mesh quality, default is 100
+    #rs.write("results/root_system"+str(number)+".vtp")
+    #vp.write_container(container, "results/container_"+str(number)+".vtp") # you can pass , resolution=200 to increase resulting mesh quality, default is 100
     number+=1

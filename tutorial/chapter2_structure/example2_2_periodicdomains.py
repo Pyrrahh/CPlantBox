@@ -1,12 +1,10 @@
 """increase axial resolution (e.g. for animation)"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 
 rs = pb.Plant()
-path = "../../modelparameter/structural/rootsystem/"
-name = "Anagallis_femina_Leitner_2010"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "wine_Fichtl"
 rs.readParameters(path + name + ".xml")
 
 # Modify axial resolution

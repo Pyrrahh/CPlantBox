@@ -1,14 +1,12 @@
 """Scale root elongation based on EquidistantGrid1D"""  
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 
 import numpy as np
 
 rs = pb.Plant()
-path = "../../modelparameter/structural/rootsystem/"
-name = "Anagallis_femina_Leitner_2010"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Zeamays_synMRI"
 rs.readParameters(path + name + ".xml")
 
 scale_elongation = pb.EquidistantGrid1D(0, -50, 100) # |\label{l3_4_scale:gridStart}|
@@ -47,6 +45,6 @@ for i in range(0, round(simtime / dt)):  # Simulation
     rs.simulate(dt, False)
     anim.update()
 
-rs.write("results/example3_4_scale_elongation.vtp")
-anim.iren.Start()  # Keeps the render window open
+#rs.write("results/example3_4_scale_elongation.vtp")
+#anim.iren.Start()  # Keeps the render window open
 

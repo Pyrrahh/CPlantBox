@@ -1,11 +1,9 @@
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 import matplotlib.pyplot as plt
 import numpy as np
 
-path = "../../modelparameter/structural/rootsystem/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
 name = "wheat"
 
 months=8 #|\label{l2_3:timebegin}|
@@ -78,5 +76,5 @@ plt.setp(axes[-1, :], xlabel='RLD $(cm/cm^3)$')
 plt.setp(axes[:, 0], ylabel='Depth $(cm)$')
 plt.legend(np.asarray(legend_lst),loc="lower center", bbox_to_anchor=(-0.8, -0.5), ncol= 8)
 fig.subplots_adjust()
-plt.savefig("results/rld_plot.png",dpi=300, bbox_inches='tight')
+#plt.savefig("/home/jhack/phd/CPlantBox/tutorial/chapter2_structure/results/rld_plot.png",dpi=300, bbox_inches='tight')
 plt.show() #|\label{l2_3:plotend}|

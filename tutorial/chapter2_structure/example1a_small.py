@@ -1,6 +1,4 @@
 """small example"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 
@@ -31,7 +29,7 @@ rs.simulate(30, True)
 #     print(o.param())
 
 # Export final result (as vtp)
-rs.write("results/example_1a.vtp")
+#rs.write("results/example_1a.vtp")
 
 # Plot, using vtk
 vp.plot_roots(rs, "subType")

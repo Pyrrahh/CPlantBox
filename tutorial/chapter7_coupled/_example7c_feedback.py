@@ -1,5 +1,4 @@
 """ coupling with DuMux as solver for the soil part, dumux-rosi must be installed & compiled """
-
 import timeit
 
 import matplotlib.pyplot as plt
@@ -51,8 +50,11 @@ max_b = [4., 4., 0.]
 cell_number = [8, 8, 25]  # [16, 16, 30]  # [32, 32, 60]
 periodic = False
 
-path = "../../modelparameter/structural/rootsystem/"
-name = "Anagallis_femina_Leitner_2010"  # Zea_mays_1_Leitner_2010
+#path = "../../modelparameter/structural/rootsystem/"
+#name = "Zea_mays_1_Leitner_2010"  # Anagallis_femina_Leitner_2010  Zea_mays_1_Leitner_2010
+
+path = "/home/jhack/phd/CPlantBox/tutorial/jupyter/summer_school_2025/"
+name = "modified_Zeamays_synMRI_modified"
 loam = [0.08, 0.43, 0.04, 1.6, 50]
 initial = -659.8 + 12.5  # -659.8
 
@@ -92,7 +94,7 @@ r.rs.setRectangularGrid(pb.Vector3d(min_b), pb.Vector3d(max_b), pb.Vector3d(cell
 
 # Manually set tropism to hydrotropism for the first ten root types
 sigma = [0.4, 1., 1., 1., 1. ] * 2
-for p in rs.getRootRandomParameter():
+for p in rs.getOrganRandomParameter(pb.root):
         p.dx = 0.25  # adjust resolution
         p.tropismT = pb.TropismType.hydro
         p.tropismN = 2  # strength of tropism

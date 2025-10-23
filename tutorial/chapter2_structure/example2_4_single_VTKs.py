@@ -1,5 +1,4 @@
 """increase axial resolution (e.g. for animation)"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
 import plantbox as pb
 import visualisation.vtk_plot as vp # |\label{3f:importvtk}|
 import numpy as np
@@ -7,14 +6,14 @@ import numpy as np
 
 """ plant """  # |\label{3f:plantStart}|
 plant = pb.MappedPlant(0)
-path = "../../modelparameter/structural/plant/"
-name = "fspm2023" 
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
+name = "Zea_mays_4_Leitner_2014" 
 plant.readParameters(path + name + ".xml")
 simtime = 60. # days
 
 # Parameters for animation
 sim_time = 15  # days
-fps = 100  # frames per second
+fps = 10 #100  # frames per second
 anim_time = 5  # seconds
 N = fps * anim_time  # [1]
 dt = sim_time / N  # days
