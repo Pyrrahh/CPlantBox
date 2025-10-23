@@ -1,12 +1,11 @@
-import plantbox as pb  # type: ignore
-
+import plantbox as pb
 import visualisation.vtk_plot as vp
 
 plant = pb.Plant()  # Create a new plant 
 
 # Open plant and root parameters from a file
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
-name = "fspm2023"
+name = "Zea_mays_4_Leitner_2014" #"fspm2023"
 plant.readParameters(path + name + ".xml")  
 root = plant.getOrganRandomParameter(pb.root) 
 stem = plant.getOrganRandomParameter(pb.stem)  
@@ -30,4 +29,4 @@ simtime = 40  # days
 plant.simulate(simtime)
 
 # Plot
-vp.plot_plant(plant, "organType")
+#vp.plot_plant(plant, "organType")

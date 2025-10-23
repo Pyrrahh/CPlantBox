@@ -3,8 +3,6 @@ growing plant example, use of AnimateRoots
 
 TODO we could add how to create avi form png (e.g. on linux), and remove files again
 """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 

@@ -1,13 +1,11 @@
 """scales branching probability"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 import numpy as np
 
 plant = pb.Plant()
-path = "../../modelparameter/structural/rootsystem/"
-name = "Glycine_max_Moraes2020"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Zeamays_synMRI"
 plant.readParameters(path + name + ".xml")
 
 box = pb.SDF_PlantBox(10, 10, 30)  # nutrient rich patch  # |\label{l34:patch}|
@@ -40,4 +38,4 @@ print('\nRoot length within patch {:g} cm, {:g}%'.format(l_in, 100 * l_in / l))
 print('Root length outside patch {:g} cm, {:g}% \n'.format(l_out, 100 * l_out / l))  # |\label{l34:analysis_end}|
 
 plant.write("results/example_3_4a.vtp")
-vp.plot_roots_and_container(plant, patch)
+#vp.plot_roots_and_container(plant, patch)

@@ -1,12 +1,10 @@
 """hydrotropism in a thin layer"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/") # |\label{l3_2_hydrotropism:libsstart}|
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 
 rs = pb.Plant()
-path = "../../modelparameter/structural/rootsystem/"
-name = "Anagallis_femina_Leitner_2010"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Zeamays_synMRI"
 rs.readParameters(path + name + ".xml") # |\label{l3_2_hydrotropism:libsend}|
 
 # Manually set tropism to hydrotropism for the first ten root types

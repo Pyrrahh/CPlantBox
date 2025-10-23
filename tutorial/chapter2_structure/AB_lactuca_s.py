@@ -7,9 +7,9 @@ adapted from "example_1e_plantShape"
 """
 import matplotlib.pyplot as plt
 import numpy as np
-import plantbox as pb  # type: ignore
 
-import visualisation.vtk_plot as vp  # type: ignore
+import plantbox as pb
+import visualisation.vtk_plot as vp
 
 # #parameters for example:
 adaptSeed = False
@@ -53,7 +53,7 @@ if adaptStem:
     for p in plant.getOrganRandomParameter(pb.stem):
         if (p.subType > 0):  # can be changed according to the suptypes of the plant
             p.nodalGrowth = 1  # < whether to implement the internodal growth
-            p.delayLat = 1  # < delay between stem creation and start of nodal growth [day]
+            # p.delayLat = 1  # < delay between stem creation and start of nodal growth [day] # apparently doesnt exist any more
             # p.delayNG = 10  # < delay between lateral creation and growth [day]
             # p.tropismAge = 10 #< only used if tropsimT = 6
             plant.setOrganRandomParameter(p)

@@ -4,10 +4,9 @@
 import numpy as np
 
 # import CPlantBox related modules
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
 import plantbox as pb
 import visualisation.vtk_plot as vp
-
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
 #%% Configure simulations
 
 # Simulation steps
@@ -35,8 +34,8 @@ se.setBaseLookUp(scale_elongation)
 # Instantiate root system for a maize plant
 rs = pb.Plant()
 rs.setSeed(0)
-name = "../../modelparameter/structural/rootsystem/Zea_mays_4_Leitner_2014"
-rs.readParameters(name + ".xml")
+name = "Zeamays_synMRI"
+rs.readParameters(path + name + ".xml")
 
 # Set the scaling function and initialize
 for p in rs.getOrganRandomParameter(pb.root): # |\label{l3_1_carbon:SefStart}|

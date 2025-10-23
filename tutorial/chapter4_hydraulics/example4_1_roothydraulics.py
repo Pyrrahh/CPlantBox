@@ -20,7 +20,7 @@ t_pot = -1  # potential plant transpiration [cm3/day] |\label{l41:t_pot}|
 
 """ root system """  # |\label{l41:rootsystem}|
 plant = pb.MappedPlant()  # |\label{l41:mappedplant}|
-path = "../../modelparameter/structural/rootsystem/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
 name = "Anagallis_femina_Leitner_2010"
 plant.readParameters(path + name + ".xml")
 plant.initialize()

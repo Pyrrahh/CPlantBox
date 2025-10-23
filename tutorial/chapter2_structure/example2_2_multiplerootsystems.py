@@ -1,10 +1,8 @@
 """multiple root systems"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 
-path = path = "../../modelparameter/structural/plant/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
 name = "fspm2023"
 
 simtime = 30  # days

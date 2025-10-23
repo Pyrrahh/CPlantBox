@@ -1,13 +1,11 @@
 """scales insertion angle"""
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 import numpy as np
 
 plant = pb.Plant()
-path = "../../modelparameter/structural/rootsystem/"
-name = "Glycine_max_Moraes2020"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Zeamays_synMRI"
 plant.readParameters(path + name + ".xml")
 
 box = pb.SDF_PlantBox(10, 10, 30)  # nutrient rich patch  # |\label{l34:patch2}|
