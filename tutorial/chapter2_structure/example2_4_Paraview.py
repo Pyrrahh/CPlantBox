@@ -4,7 +4,7 @@ import visualisation.vtk_plot as vp
 
 plant = pb.Plant()
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
-name = "Zeamays_synMRI"
+name = "Heliantus_Pagès_2013"
 plant.readParameters(path + name + ".xml")
 
 # Modify axial resolution

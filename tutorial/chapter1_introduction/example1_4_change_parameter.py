@@ -5,7 +5,7 @@ plant = pb.Plant()  # Create a new plant
 
 # Open plant and root parameters from a file
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
-name = "Zea_mays_4_Leitner_2014" #"fspm2023"
+name = "4testrel" #"fspm2023"
 plant.readParameters(path + name + ".xml")  
 root = plant.getOrganRandomParameter(pb.root) 
 stem = plant.getOrganRandomParameter(pb.stem)  

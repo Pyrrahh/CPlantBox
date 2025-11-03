@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
-name = "wheat"
+name = "Crypsis_aculeata_Clausnitzer_1994"
 
 months=8 #|\label{l2_3:timebegin}|
 times=np.linspace(0,30*months,months+1) #|\label{l2_3:timeend}|

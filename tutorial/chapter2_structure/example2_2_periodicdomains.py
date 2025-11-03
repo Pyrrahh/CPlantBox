@@ -4,7 +4,7 @@ import visualisation.vtk_plot as vp
 
 rs = pb.Plant()
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
-name = "wine_Fichtl"
+name = "Heliantus_Pagès_2013"
 rs.readParameters(path + name + ".xml")
 
 # Modify axial resolution

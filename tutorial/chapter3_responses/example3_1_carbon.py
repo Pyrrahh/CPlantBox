@@ -34,7 +34,7 @@ se.setBaseLookUp(scale_elongation)
 # Instantiate root system for a maize plant
 rs = pb.Plant()
 rs.setSeed(0)
-name = "Zeamays_synMRI"
+name = "Crypsis_aculeata_Clausnitzer_1994"
 rs.readParameters(path + name + ".xml")
 
 # Set the scaling function and initialize

@@ -6,7 +6,7 @@ import numpy as np
 
 rs = pb.Plant()
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
-name = "Zeamays_synMRI"
+name = "Heliantus_Pagès_2013"
 rs.readParameters(path + name + ".xml")
 
 scale_elongation = pb.EquidistantGrid1D(0, -50, 100) # |\label{l3_4_scale:gridStart}|

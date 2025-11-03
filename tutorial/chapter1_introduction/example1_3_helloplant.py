@@ -5,7 +5,7 @@ plant = pb.Plant()  # Create a new plant
 
 # Open plant and root parameter from a file
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
-name = "Zea_mays_4_Leitner_2014" #"fspm2023"
+name = "Pisum_sativum_b_TSEGAYE_1995" #"fspm2023"
 plant.readParameters(path + name + ".xml")
 
 plant.initialize()

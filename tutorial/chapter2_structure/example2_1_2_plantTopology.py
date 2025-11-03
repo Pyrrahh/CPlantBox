@@ -2,7 +2,7 @@ import plantbox as pb
 import visualisation.vtk_plot as vp
 
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
-name = "Zea_mays_4_Leitner_2014.xml"
+name = "Pisum_sativum_b_TSEGAYE_1995.xml"
 ### Simple example
 p = pb.MappedPlant(2)
 p.readParameters(path + name, verbose = True)

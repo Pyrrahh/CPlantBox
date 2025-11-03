@@ -6,7 +6,7 @@ import numpy as np
 
 rs = pb.Plant()
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
-name = "Zeamays_synMRI"
+name = "Heliantus_Pagès_2013"
 rs.readParameters(path + name + ".xml")
 
 # box with a left and a right compartment for analysis

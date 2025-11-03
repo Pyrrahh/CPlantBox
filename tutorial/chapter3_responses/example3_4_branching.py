@@ -5,7 +5,7 @@ import numpy as np
 
 plant = pb.Plant()
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
-name = "Zeamays_synMRI"
+name = "Heliantus_Pagès_2013"
 plant.readParameters(path + name + ".xml")
 
 box = pb.SDF_PlantBox(10, 10, 30)  # nutrient rich patch  # |\label{l34:patch}|

@@ -3,7 +3,7 @@ import plantbox as pb
 import visualisation.vtk_plot as vp
 
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
-name = "fspm2023"
+name = "Pisum_sativum_b_TSEGAYE_1995"
 
 simtime = 30  # days
 N = 3  # number of columns and rows #|\label{l2_2_2:Ncolsrows}|

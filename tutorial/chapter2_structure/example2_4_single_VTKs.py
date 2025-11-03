@@ -7,7 +7,7 @@ import numpy as np
 """ plant """  # |\label{3f:plantStart}|
 plant = pb.MappedPlant(0)
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
-name = "Zea_mays_4_Leitner_2014" 
+name = "Heliantus_Pagès_2013" 
 plant.readParameters(path + name + ".xml")
 simtime = 60. # days
 
