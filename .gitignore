@@ -50,6 +50,7 @@ venv/
 .settings/
 Debug/
 *.vtp
+dumux/
 
 # Jupyter notebook
 tutorial/jupyter/.ipynb_checkpoints/
