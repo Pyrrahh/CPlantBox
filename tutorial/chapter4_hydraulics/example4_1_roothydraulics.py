@@ -1,5 +1,8 @@
 """ water movement within the root (static soil) """
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 47c0a376 (checked chapter 6)
 import plantbox as pb
 import visualisation.vtk_plot as vp
 from functional.PlantHydraulicParameters import PlantHydraulicParameters  # |\label{l41:imports}|
@@ -32,10 +35,14 @@ t_pot = -1  # potential plant transpiration [cm3/day] |\label{l41:t_pot}|
 plant = pb.MappedPlant()  # |\label{l41:mappedplant}|
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
 <<<<<<< HEAD
+<<<<<<< HEAD
 name = "maize_p1"
 =======
 name = "Anagallis_femina_Leitner_2010"
 >>>>>>> 54d93dba10925029276f79e28c9e91802754ac02
+=======
+name = "maize_p1"
+>>>>>>> 47c0a376 (checked chapter 6)
 plant.readParameters(path + name + ".xml")
 plant.initialize()
 plant.simulate(initial_age)  # |\label{l41:rootsystem_end}|

@@ -1,8 +1,11 @@
 """ map root segments to a soil grid """
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import numpy as np
 >>>>>>> 54d93dba10925029276f79e28c9e91802754ac02
+=======
+>>>>>>> 47c0a376 (checked chapter 6)
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
