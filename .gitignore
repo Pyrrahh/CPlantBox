@@ -42,12 +42,15 @@ __pycache__
 
 # pyenv
 .python-version
+.venv/
+venv/
 
 # Others
 .pydevproject
 .settings/
 Debug/
 *.vtp
+dumux/
 
 # Jupyter notebook
 tutorial/jupyter/.ipynb_checkpoints/
