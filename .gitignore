@@ -42,6 +42,8 @@ __pycache__
 
 # pyenv
 .python-version
+.venv/
+venv/
 
 # Others
 .pydevproject
