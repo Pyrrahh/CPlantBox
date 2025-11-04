@@ -1,8 +1,6 @@
 """ 
 Solute transport example - nitrate in movement in soil 
 """
-import sys; sys.path.append("../"); sys.path.append("../.."); sys.path.append("../../src/")
-sys.path.append("../../../dumux-rosi/python/modules"); sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/");
 
 import datetime
 import pickle
@@ -11,7 +9,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 import pandas as pd
-import figure_style
+#import figure_style
 
 import plantbox as pb  # CPlantBox
 from rosi_richardsnc import RichardsNCSP  # C++ part (Dumux binding), macroscopic soil model
@@ -132,7 +130,7 @@ s.setICZ_solute(nitrate_initial_values[::-1], nitrate_z[::-1])  # step-wise func
 """ Boundary conditions """  # |\label{l62:init_bc}|
 start_date_str = '2013-05-01'
 end_date_str = '2013-08-01'
-times, net_inf = net_infiltration_csv("RO_AKRW_003.2007-01-01T00_00_00.2015-01-01T00_00_00_net_infiltration.csv", start_date_str, end_date_str)
+times, net_inf = net_infiltration_csv("/home/jhack/phd/CPlantBox/tutorial/chapter6_soil/RO_AKRW_003.2007-01-01T00_00_00.2015-01-01T00_00_00_net_infiltration.csv", start_date_str, end_date_str)
 # plt.bar(times, net_inf, color = 'skyblue', edgecolor = 'k', width = 0.8);,
 # print("net gain loss over the period: ", np.sum(net_inf), "l/m2")
 # plt.show()

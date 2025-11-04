@@ -6,13 +6,7 @@
 
 # This example solves the Richards equation with DuMux. The github repository "dumux-rosi" (https://github.com/Plant-Root-Soil-Interactions-Modelling/dumux-rosi.git) needs to be cloned
 # into the same path level as CPlantBox.
-
-import sys; sys.path.append("../modules"); sys.path.append("../../build-cmake/cpp/python_binding/");
-# add paths to the folders containing CPlantBox and dumux-rosi
-import sys;  # |\label{l61:paths_a}|
-sys.path.append("../../../dumux-rosi/python/modules");
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/");
-sys.path.append("../../../CPlantBox/src")  # |\label{l61:paths_e}|
+  # |\label{l61:paths_e}|
 
 from rosi_richards import RichardsSP  # C++ part (Dumux binding)
 from richards import RichardsWrapper  # Python part

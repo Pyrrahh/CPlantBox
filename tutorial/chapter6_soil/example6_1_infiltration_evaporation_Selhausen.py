@@ -6,11 +6,7 @@
 # into the same path level as CPlantBox.
 
 # add paths to the folders containing CPlantBox and dumux-rosi
-import sys
-base_path= "./CPlantBox/dumux/"
-sys.path.append(base_path+"dumux-rosi/python/modules")
-sys.path.append(base_path+"dumux-rosi/build-cmake/cpp/python_binding/")
-sys.path.append(base_path+"CPlantBox/src")
+
 
 import matplotlib.pyplot as plt  #
 import numpy as np  #

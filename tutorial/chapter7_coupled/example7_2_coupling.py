@@ -1,7 +1,4 @@
 """ coupling with DuMux as solver for the soil part, dumux-rosi must be installed & compiled """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/")  # dumux python binding
-sys.path.append("../../../dumux-rosi/python/modules/")  # python wrappers
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
@@ -12,7 +9,7 @@ from rosi_richards import RichardsSP  # C++ part (Dumux binding)
 from richards import RichardsWrapper  # Python part
 import numpy as np
 import matplotlib.pyplot as plt
-import figure_style
+#import figure_style
 import timeit
 
 
@@ -25,7 +22,7 @@ min_b = [-35., -10., -50.]  # [cm]
 max_b = [35., 10., 0.]  # [cm]
 cell_number = [17, 5, 50]  # ~[4*4*1] cm3
 
-path = "../../modelparameter/structural/rootsystem/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
 name = "Zeamays_synMRI_modified"  #"Anagallis_femina_Leitner_2010"  # Zea_mays_1_Leitner_2010, Zeamays_synMRI.xml  <<<<-------
 trans = 250  # cm3 /day (sinusoidal) = mL/day
 wilting_point = -15000  # cm
@@ -58,7 +55,7 @@ plant.setGeometry(sdf)  # |\label{l72c:soil_plant_end}|
 
 """ root hydraulic properties """
 params = PlantHydraulicParameters()  # |\label{l72c:hydraulic}|
-params.read_parameters("../../modelparameter/functional/plant_hydraulics/couvreur2012")
+params.read_parameters("/home/jhack/phd/CPlantBox/modelparameter/functional/plant_hydraulics/couvreur2012")
 # params.plot_conductivities(True) # |\label{l72c:plot_conductivities}|
 hm = HydraulicModel_Doussan(plant, params)
 hm.wilting_point = wilting_point  # |\label{l72c:hydraulic_end}|

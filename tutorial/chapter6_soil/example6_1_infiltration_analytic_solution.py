@@ -4,7 +4,6 @@ from Vanderborght et al. (2005)
 
 D. Leitner, 2018
 """
-import sys; sys.path.append("../modules"); sys.path.append("../../../CPlantBox");  sys.path.append("../../../CPlantBox/src")
 
 import functional.van_genuchten as vg
 

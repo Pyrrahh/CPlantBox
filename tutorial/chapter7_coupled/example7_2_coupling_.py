@@ -1,7 +1,4 @@
 """ coupling with DuMux as solver for the soil part, dumux-rosi must be installed & compiled """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/")  # dumux python binding
-sys.path.append("../../../dumux-rosi/python/modules/")  # python wrappers
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
@@ -24,8 +21,8 @@ min_b = [-35., -10., -50.]  # [cm]
 max_b = [35., 10., 0.]  # [cm]
 cell_number = [17, 5, 50]  # 1D
 
-path = "../../modelparameter/structural/rootsystem/"
-name = "Zeamays_synMRI_modified"  #"Anagallis_femina_Leitner_2010"  # Zea_mays_1_Leitner_2010, Zeamays_synMRI.xml  <<<<-------
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "wine_Fichtl"  #"Anagallis_femina_Leitner_2010"  # Zea_mays_1_Leitner_2010, Zeamays_synMRI.xml  <<<<-------
 trans = 100  # cm3 /day (sinusoidal) = mL/day
 wilting_point = -15000  # cm
 rs_age = 21  # root system initial age [day]
@@ -56,7 +53,7 @@ plant.setGeometry(sdf)  # |\label{l72c:soil_plant_end}|
 
 """ root hydraulic properties """
 params = PlantHydraulicParameters()  # |\label{l72c:hydraulic}|
-params.read_parameters("../../modelparameter/functional/plant_hydraulics/couvreur2012")
+params.read_parameters("/home/jhack/phd/CPlantBox/modelparameter/functional/plant_hydraulics/couvreur2012")
 # params.plot_conductivities(True)
 # kz = 4.32e-2  # [cm^3/day] # TODO have we described the options in the book?
 # kr = 1.728e-4  # [1/day]
@@ -100,7 +97,7 @@ for i in range(0, N):  # |\label{l72c:loop}|
         if err2 > 1.e-6:
             print("error: potential transpiration differs root collar flux in Neumann case" , err2)
             print(-trans * sinusoidal(t))
-            print(collar_flux)
+            #print(collar_flux)
     n = round(float(i) / float(N) * 100.)  # |\label{l72c:progress}|
     print("[" + ''.join(["*"]) * n + ''.join([" "]) * (100 - n) + "], [{:g}, {:g}] cm soil [{:g}, {:g}] cm root at {:g} days {:g}"
             .format(np.min(hs), np.max(hs), np.min(hx), np.max(hx), s.simTime, hx[0]))

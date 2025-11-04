@@ -1,8 +1,6 @@
 """ 
 Solute transport example - radially symmetric 1D model for nitrate uptake
 """
-import sys; sys.path.append("../"); sys.path.append("../../../CPlantBox/"); sys.path.append("../../../CPlantBox/src") # |\label{l63:lib_start}|
-sys.path.append("../../../dumux-rosi/python/modules"); sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/");
 
 import datetime
 import pickle

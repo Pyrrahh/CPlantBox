@@ -8,10 +8,7 @@
 # into the same path level as CPlantBox.
 
 # add paths to the folders containing CPlantBox and dumux-rosi
-import sys;  # |\label{l61i:paths_a}|
-sys.path.append("../../../dumux-rosi/python/modules");
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/");
-sys.path.append("../../../CPlantBox/src")  # |\label{l61i:paths_e}|
+ # |\label{l61i:paths_e}|
 
 import matplotlib.pyplot as plt  # |\label{l61i:bibs1_a}|
 import numpy as np  # |\label{l61i:bibs1_e}|

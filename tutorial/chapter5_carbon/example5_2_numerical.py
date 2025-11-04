@@ -1,7 +1,4 @@
 import os
-import sys
-sys.path.append("../.."); sys.path.append("../../src/")
-sys.path.append("../../modelparameter/functional")
 import plantbox as pb
 from functional.xylem_flux import XylemFluxPython  # Python hybrid solver
 import numpy as np
@@ -9,9 +6,9 @@ import visualisation.vtk_plot as vp # for quick 3d vizualisations
 import matplotlib.pyplot as plt
 from functional.phloem_flux import PhloemFluxPython  
 from functional.PlantHydraulicParameters import PlantHydraulicParameters
-from plant_photosynthesis.wheat_FcVB_Giraud2023adapted import *
-from plant_hydraulics.wheat_Giraud2023adapted import *
-from plant_sucrose.wheat_phloem_Giraud2023adapted import *
+#from plant_photosynthesis.wheat_FcVB_Giraud2023adapted import *
+#from plant_hydraulics.wheat_Giraud2023adapted import *
+#from plant_sucrose.wheat_phloem_Giraud2023adapted import *
 import numpy as np
 import pandas as pd
 from datetime import datetime 
@@ -31,13 +28,13 @@ depth = 60
 p_mean = -600 # mean soil water potential [cm]
 
 """ Weather data """
-path = "../../modelparameter/functional/climate/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/functional/climate/"
 weatherData = pd.read_csv(path + 'Selhausen_weather_data.txt', delimiter = "\t")  
 
 """ plant """
 plant = pb.MappedPlant(seednum = 2) 
-path = "../../modelparameter/structural/plant/"
-name = "Triticum_aestivum_test_2021" #"Triticum_aestivum_adapted_2023"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
+name = "5" #"Triticum_aestivum_adapted_2023"
 plant.readParameters(path + name + ".xml")
 
 sdf = pb.SDF_PlantBox(np.inf, np.inf, depth )
@@ -55,10 +52,10 @@ plant.setSoilGrid(picker)
 
 """ Plant functional properties """
 params = PlantHydraulicParameters()  # |\label{l52:hydraulic}|
-params.read_parameters("../../modelparameter/functional/plant_hydraulics/wheat_Giraud2023adapted")  # |\label{l52:hydraulic_end}|
+params.read_parameters("/home/jhack/phd/CPlantBox/modelparameter/functional/plant_hydraulics/wheat_Giraud2023adapted")  # |\label{l52:hydraulic_end}|
 hm = PhloemFluxPython(plant, params, psiXylInit = min(sx),ciInit = weatherData['co2'][0]*0.5) # |\label{l52:phloempy}|
 hm.wilting_point = -10000
-path = '../../modelparameter/functional/'
+path = '/home/jhack/phd/CPlantBox/modelparameter/functional/'
 hm.read_photosynthesis_parameters(filename = path + "plant_photosynthesis/photosynthesis_parameters2025")  # |\label{l52:read}|
 hm.read_phloem_parameters(filename =path + "plant_sucrose/phloem_parameters2025")  # |\label{l52:read2}| 
 # list_data = hm.get_phloem_data_list() # option of data that can be obtained from the phloem model

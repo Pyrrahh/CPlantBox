@@ -1,6 +1,4 @@
 """ map root segments to a soil grid """
-import sys; sys.path.append("../.."); sys.path.append("../../src/");
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/"); sys.path.append("../../../dumux-rosi/python/modules/");
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
@@ -11,8 +9,8 @@ import numpy as np
 
 """ Root system """  # |\label{l71m:root_system_start}|
 plant = pb.MappedPlant()
-path = "../../modelparameter/structural/rootsystem/"
-name = "Anagallis_femina_Leitner_2010"  # Zea_mays_1_Leitner_2010, Anagallis_femina_Leitner_2010
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Zeamays_synMRI"  # Zea_mays_1_Leitner_2010, Anagallis_femina_Leitner_2010
 plant.readParameters(path + name + ".xml")
 plant.setSeed(4)  # |\label{l71m:random}|
 plant.initialize()  # |\label{l71m:root_system_end}|
