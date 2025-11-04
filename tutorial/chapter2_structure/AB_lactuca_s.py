@@ -5,13 +5,11 @@ date : 2022-03-24
 adapted from "example_1e_plantShape"
 
 """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
+import matplotlib.pyplot as plt
+import numpy as np
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 # #parameters for example:
 adaptSeed = False
@@ -33,14 +31,14 @@ getImage = False
 # #create plant:
 plant = pb.Plant()
 # Open plant and root parameter from a file
-path = "../../modelparameter/structural/plant/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
 name = "Lactuca_s"
 plant.readParameters(path + name + ".xml")
 
 # #create rootsystem:
 rs = pb.RootSystem()
 # Open plant and root parameter from a file
-path = "../../../modelparameter/plant/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/plant/"
 name = "Lactuca_s"
 rs.readParameters(path + name + ".xml")
 
@@ -55,7 +53,7 @@ if adaptStem:
     for p in plant.getOrganRandomParameter(pb.stem):
         if (p.subType > 0):  # can be changed according to the suptypes of the plant
             p.nodalGrowth = 1  # < whether to implement the internodal growth
-            p.delayLat = 1  # < delay between stem creation and start of nodal growth [day]
+            # p.delayLat = 1  # < delay between stem creation and start of nodal growth [day] # apparently doesnt exist any more
             # p.delayNG = 10  # < delay between lateral creation and growth [day]
             # p.tropismAge = 10 #< only used if tropsimT = 6
             plant.setOrganRandomParameter(p)

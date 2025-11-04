@@ -1,4 +1,5 @@
 """ water movement within the root (static soil) """
+<<<<<<< HEAD
 import plantbox as pb
 import visualisation.vtk_plot as vp
 from functional.PlantHydraulicParameters import PlantHydraulicParameters  # |\label{l41:imports}|
@@ -6,7 +7,18 @@ from functional.PlantHydraulicModel import HydraulicModel_Doussan
 from functional.PlantHydraulicModel import HydraulicModel_Meunier  # |\label{l41:imports_end}|
 
 import numpy as np
+=======
+>>>>>>> 54d93dba10925029276f79e28c9e91802754ac02
 import matplotlib.pyplot as plt
+import numpy as np
+import plantbox as pb
+
+import visualisation.vtk_plot as vp
+from functional.PlantHydraulicModel import (
+          HydraulicModel_Doussan,
+          HydraulicModel_Meunier,  # |\label{l41:imports_end}|
+)
+from functional.PlantHydraulicParameters import PlantHydraulicParameters  # |\label{l41:imports}|
 
 """ Parameters """  # |\label{l41:parameters}|
 initial_age = 14  # root system age [day]
@@ -19,7 +31,11 @@ t_pot = -1  # potential plant transpiration [cm3/day] |\label{l41:t_pot}|
 """ root system """  # |\label{l41:rootsystem}|
 plant = pb.MappedPlant()  # |\label{l41:mappedplant}|
 path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+<<<<<<< HEAD
 name = "maize_p1"
+=======
+name = "Anagallis_femina_Leitner_2010"
+>>>>>>> 54d93dba10925029276f79e28c9e91802754ac02
 plant.readParameters(path + name + ".xml")
 plant.initialize()
 plant.simulate(initial_age)  # |\label{l41:rootsystem_end}|

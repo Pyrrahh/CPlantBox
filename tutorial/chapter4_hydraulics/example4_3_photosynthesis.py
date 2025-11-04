@@ -1,5 +1,5 @@
 """ Example of the photosynthesis module, using real data from the Selhausen lysimeter setup """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")  # |\label{l43:imports}|
+# |\label{l43:imports}|
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import pandas as pd
@@ -25,7 +25,7 @@ depth = 60  # soil depth [cm]
 Hs = -1000  #  top soil matric potential [cm]
 
 """ Weather data """
-path = "../../modelparameter/functional/climate/"
+path = "/home/jhack/phd/CPlantBox/modelparameter/functional/climate/"
 weatherData = pd.read_csv(path + 'Selhausen_weather_data.txt', delimiter = "\t")  # |\label{l43:Tereno}|
 
 """ soil """
@@ -35,8 +35,8 @@ p_s = np.linspace(Hs, Hs - depth, depth)  # water potential per soil layer  # |\
 
 """ plant """
 plant = pb.MappedPlant()  # |\label{l43:plant}|
-path = "../../modelparameter/structural/plant/"
-name = "Triticum_aestivum_test_2021"
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/plant/"
+name = "newtree_new"
 plant.readParameters(path + name + ".xml")
 
 plant.setGeometry(soilSpace)  # creates soil space to stop roots from growing out of the soil
@@ -48,10 +48,10 @@ plant.simulate(plant_age, False)  # |\label{l43:plantEnd}|
 
 """ plant hydraulic properties """
 params = PlantHydraulicParameters()  # |\label{l43:hydraulicparams}|
-params.read_parameters("../../modelparameter/functional/plant_hydraulics/wheat_Giraud2023adapted")  # |\label{l6h:hydraulic_end}|
+params.read_parameters("/home/jhack/phd/CPlantBox/modelparameter/functional/plant_hydraulics/wheat_Giraud2023adapted")  # |\label{l6h:hydraulic_end}|
 hm = PhotosynthesisPython(plant, params)  # |\label{l43:PhotosynthesisPython}|
 
-path = '../../modelparameter/functional/plant_photosynthesis/'
+path = '/home/jhack/phd/CPlantBox/modelparameter/functional/plant_photosynthesis/'
 hm.read_photosynthesis_parameters(filename = path + "photosynthesis_parameters")  # |\label{l43:read}|
 # hm.write_photosynthesis_parameters(filename=path+"photosynthesis_parametersNew")   # |\label{l43:write}|
 

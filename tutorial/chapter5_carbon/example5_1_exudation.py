@@ -1,5 +1,4 @@
 """analytic computation of citrate exudation around a growing root system"""
-import sys; sys.path.append("../..")# |\label{l5_2_exudation:libstart}|
 import time
 import numpy as np
 import matplotlib as mpl
@@ -18,14 +17,14 @@ mpl.rcParams['mathtext.default'] = 'regular'
 # Root system
 #
 rs = pb.RootSystem() # |\label{l5_2_exudation:rsstart}|
-path = "../../modelparameter/structural/rootsystem/"
-name = "Faba_synMRI"  
+path = "/home/jhack/phd/CPlantBox/modelparameter/structural/rootsystem/"
+name = "Zea_mays_1_Leitner_2010"  
 rs.readParameters(path + name + ".xml")
 rs.setSeed(1)
 rs.initialize()
 simtime = 10
 rs.simulate(simtime, True);
-rs.write("results/example5_2_exudation_rootsystem.vtp") # |\label{l5_2_exudation:rsend}|
+rs.write("/home/jhack/phd/CPlantBox/tutorial/chapter5_carbon/results/example5_2_exudation_rootsystem.vtp") # |\label{l5_2_exudation:rsend}|
 
 #
 # Grid parameter
@@ -78,7 +77,7 @@ Z = np.linspace(-depth, 0, nz)
 X_, Y_, Z_ = np.meshgrid(X, Y, Z, indexing = "ij")# |\label{l5_2_exudation:reshapeend}|
 
 
-gridToVTK("results/./example5_2_exudation_citrate", X, Y, Z, pointData = {"Citrate concentration":C})# |\label{l5_2_exudation:save}|
+gridToVTK("/home/jhack/phd/CPlantBox/tutorial/chapter5_carbon/results/example5_2_exudation_citrate", X, Y, Z, pointData = {"Citrate concentration":C})# |\label{l5_2_exudation:save}|
 
 
 fig1 = plt.figure() # |\label{l5_2_exudation:plotstart}|

@@ -1,19 +1,15 @@
 """ coupling with DuMux as solver for the soil part, dumux-rosi must be installed & compiled """
-import sys; sys.path.append("../.."); sys.path.append("../../src/")
-sys.path.append("../../../dumux-rosi/build-cmake/cpp/python_binding/")  # dumux python binding
-sys.path.append("../../../dumux-rosi/python/modules/")  # python wrappers
-
-import plantbox as pb
-import visualisation.vtk_plot as vp
-from functional.xylem_flux import XylemFluxPython  # Python hybrid solver
-from functional.root_conductivities import *  # hard coded conductivities
-
-from rosi_richards import RichardsSP  # C++ part (Dumux binding)
-from richards import RichardsWrapper  # Python part
-
-import numpy as np
-import matplotlib.pyplot as plt
 import timeit
+
+import matplotlib.pyplot as plt
+import numpy as np
+import plantbox as pb
+from richards import RichardsWrapper  # Python part
+from rosi_richards import RichardsSP  # C++ part (Dumux binding)
+
+import visualisation.vtk_plot as vp
+from functional import root_conductivities as root_cond  # hard coded conductivities
+from functional.xylem_flux import XylemFluxPython  # Python hybrid solver
 
 
 class SoilNN(pb.SoilLookUp):
@@ -45,6 +41,8 @@ class SoilLinear(pb.SoilLookUp):
 def sinusoidal(t):
     return np.sin(2. * np.pi * np.array(t) - 0.5 * np.pi) + 1.
 
+def picker(x, y, z):
+    return s.pick([x, y, z])
 
 """ Parameters """
 min_b = [-4., -4., -25.]
@@ -52,8 +50,11 @@ max_b = [4., 4., 0.]
 cell_number = [8, 8, 25]  # [16, 16, 30]  # [32, 32, 60]
 periodic = False
 
-path = "../../modelparameter/structural/rootsystem/"
-name = "Anagallis_femina_Leitner_2010"  # Zea_mays_1_Leitner_2010
+#path = "../../modelparameter/structural/rootsystem/"
+#name = "Zea_mays_1_Leitner_2010"  # Anagallis_femina_Leitner_2010  Zea_mays_1_Leitner_2010
+
+path = "/home/jhack/phd/CPlantBox/tutorial/jupyter/summer_school_2025/"
+name = "modified_Zeamays_synMRI_modified"
 loam = [0.08, 0.43, 0.04, 1.6, 50]
 initial = -659.8 + 12.5  # -659.8
 
@@ -85,16 +86,15 @@ else:
     sdf = pb.SDF_PlantBox(np.Inf, np.Inf, max_b[2] - min_b[2])
 rs.setGeometry(sdf)
 r = XylemFluxPython(rs)
-init_conductivities(r, age_dependent)
+root_cond.init_conductivities(r, age_dependent)
 
 """ Coupling (map indices) """
-picker = lambda x, y, z: s.pick([x, y, z])
 r.rs.setSoilGrid(picker)  # maps segments
 r.rs.setRectangularGrid(pb.Vector3d(min_b), pb.Vector3d(max_b), pb.Vector3d(cell_number), True)
 
 # Manually set tropism to hydrotropism for the first ten root types
 sigma = [0.4, 1., 1., 1., 1. ] * 2
-for p in rs.getRootRandomParameter():
+for p in rs.getOrganRandomParameter(pb.root):
         p.dx = 0.25  # adjust resolution
         p.tropismT = pb.TropismType.hydro
         p.tropismN = 2  # strength of tropism

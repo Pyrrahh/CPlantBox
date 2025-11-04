@@ -1,7 +1,4 @@
 """ Whole root system conductance (Krs) for different root architectures and SUF depth profiles"""
-
-import sys; sys.path.append("../"); sys.path.append("../.."); sys.path.append("../../src/")
-
 import plantbox as pb
 import visualisation.vtk_plot as vp
 from functional.PlantHydraulicParameters import PlantHydraulicParameters  # |\label{l42:imports}|
@@ -9,7 +6,7 @@ from functional.PlantHydraulicModel import HydraulicModel_Meunier  # |\label{l42
 
 import numpy as np
 import matplotlib.pyplot as plt
-import figure_style
+#import figure_style
 import csv
 
 """ Simulation parameters """  # |\label{l42:parameters}|
@@ -17,13 +14,13 @@ simtime = 70  # simulate from day 1 to 70
 dt = 1
 
 architectures = [  # |\label{l42:architecture}|
-    "Heliantus_Pages_2013",
-    "Glycine_max_Moraes2020_opt2",
-    "Brassica_oleracea_Vansteenkiste_2014",
-    "Zea_mays_1_Leitner_2010"
+    "4",
+    "5",
+    "6",
+    "7",
 ]
 
-path = "../../modelparameter/structural/rootsystem/"  # |\label{l42:architecture_end}|
+path = "/home/jhack/phd/CPlantBox/modelparameter/"  # |\label{l42:architecture_end}|
 
 """ Root hydraulic properties """  # |\label{l42:roothydraulics}|
 param = PlantHydraulicParameters()
@@ -144,7 +141,7 @@ for i, name in enumerate(architectures):
     print(f"{name:20s} | Total root length: {lengths[i]:8.2f} cm | Surface area: {surfaces[i]:8.2f} cm2")
 
 # Write CSV
-csv_file = "results/krs_length_surface.csv"
+csv_file = "/home/jhack/phd/CPlantBox/tutorial/chapter4_hydraulics/results/krs_length_surface.csv"
 with open(csv_file, mode = "w", newline = "") as f:
     writer = csv.writer(f)
     writer.writerow(["architecture", "day", "krs", "length", "surface"])

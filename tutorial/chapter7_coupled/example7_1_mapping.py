@@ -1,11 +1,13 @@
 """ map root segments to a soil grid """
+<<<<<<< HEAD
+=======
+import numpy as np
+>>>>>>> 54d93dba10925029276f79e28c9e91802754ac02
 
 import plantbox as pb
 import visualisation.vtk_plot as vp
-from rosi_richards import RichardsSP  # C++ part (Dumux binding)
 from richards import RichardsWrapper  # Python part
-
-import numpy as np
+from rosi_richards import RichardsSP  # C++ part (Dumux binding)
 
 """ Root system """  # |\label{l71m:root_system_start}|
 plant = pb.MappedPlant()
